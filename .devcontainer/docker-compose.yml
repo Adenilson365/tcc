@@ -9,7 +9,7 @@ services:
     volumes:
       - ..:/app
     networks:
-    - db_net
+    - db_net_tcc
   db:
     image: postgres:13.16
     ports:
@@ -17,20 +17,21 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
+      POSTGRES_DB: tcc
     networks:
-      - db_net
+      - db_net_tcc
     volumes:
-      - db_vol:/var/lib/postgresql/data
+      - db_vol_tcc:/var/lib/postgresql/data
   adminer:
     image: adminer
     restart: always
     ports:
       - 8080:8080
     networks:
-      - db_net
+      - db_net_tcc
 networks:
-  db_net:
+  db_net_tcc:
     driver: bridge
 volumes:
-  db_vol:
-    name: db_vol
+  db_vol_tcc:
+    name: db_vol_tcc
