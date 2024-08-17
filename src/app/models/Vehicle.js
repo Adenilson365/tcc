@@ -5,6 +5,7 @@ class Vehicle extends Model{
         super.init(
             {
                 placa: Sequelize.STRING,
+                active: Sequelize.BOOLEAN,
                 description: Sequelize.STRING
                 
             },

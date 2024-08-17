@@ -10,7 +10,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      quantity:{
+      fuel_quantity:{
         type: Sequelize.FLOAT,
         allowNull: false,
       },
@@ -19,6 +19,9 @@ module.exports = {
         allowNull: false,
       },
       fuel_type:{
+        type: Sequelize.STRING,
+      },
+      invoice_number:{
         type: Sequelize.STRING,
       },
       description: {

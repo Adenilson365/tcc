@@ -15,6 +15,11 @@ module.exports = {
           unique: true,
           allowNull: false,
       },
+      active:{
+        type:Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+      },
       description: {
         type: Sequelize.STRING,
     },
