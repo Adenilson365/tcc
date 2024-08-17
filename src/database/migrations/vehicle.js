@@ -12,6 +12,7 @@ module.exports = {
       },
       placa: {
           type: Sequelize.STRING,
+          unique: true,
           allowNull: false,
       },
       description: {
