@@ -5,6 +5,7 @@ import VehicleController from "./app/controllers/VehicleController";
 import authMiddleware from './app/middlewares/auth'
 import FreightController from "./app/controllers/FreightController";
 import SupplyController from "./app/controllers/SupplyController";
+import ExpenseController from "./app/controllers/ExpenseController";
 const routes = new Router();
 
 routes.post('/users', UserController.store)
@@ -18,5 +19,8 @@ routes.get('/freights',authMiddleware,FreightController.index)
 
 //Combustivel
 routes.get('/supplies',authMiddleware, SupplyController.index)
+
+// despesas
+routes.get('/expenses',authMiddleware, ExpenseController.index)
 
 export default routes;
