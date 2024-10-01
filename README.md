@@ -28,3 +28,9 @@ npx sequelize-cli db:seed:all
 ```
 npx sequelize-cli db:seed:undo:all
 ```
+- Rodar a aplicação
+```
+npx nodemon index.js
+```
+
+- Ao criar novo modelo, não esquecer de inserir no index.js, para que haja a conexão
