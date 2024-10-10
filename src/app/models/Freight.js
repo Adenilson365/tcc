@@ -24,6 +24,13 @@ class Freight extends Model {
     )
     return this;
   }
+
+  static associate(models){
+    this.belongsTo(models.User, { foreignKey: "user_id", as: "users" });
+    //belongsTo: Define a relação de 1:N 1 usuário tem muitas despesas
+
+}
+
 }
 
 export default Freight;

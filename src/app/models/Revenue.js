@@ -1,10 +1,10 @@
-import Sequelize, { Model } from "sequelize";
+import  Sequelize, { Model } from "sequelize";
 
-class Expense extends Model {
+class Revenue extends Model {
     static init(sequelize) {
         super.init(
             {
-                purchase_value: Sequelize.FLOAT,
+                value: Sequelize.FLOAT,
                 description: Sequelize.STRING,
             },
             {
@@ -16,10 +16,9 @@ class Expense extends Model {
 
     static associate(models){
         this.belongsTo(models.User, { foreignKey: "user_id", as: "users" });
-        //belongsTo: Define a relação de 1:N 1 usuário tem muitas despesas
+        //belongsTo: Define a relação de 1:N 1 usuário tem muitas receitas
     }
 
 }
 
-
-export default Expense;
+export default Revenue;

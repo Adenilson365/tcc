@@ -1,5 +1,7 @@
 'use strict';
 
+const { user } = require('pg/lib/defaults');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -12,6 +14,7 @@ module.exports = {
         description: 'Diesel for the truck',
         created_at: new Date(),
         updated_at: new Date(),
+        user_id: 1
       },
       {
         fuel_quantity: 200,
@@ -21,6 +24,7 @@ module.exports = {
         description: 'Diesel for the truck',
         created_at: new Date(),
         updated_at: new Date(),
+        user_id: 2
       }
     ], {});
   },

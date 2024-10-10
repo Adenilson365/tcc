@@ -1,4 +1,4 @@
-import { where } from 'sequelize';
+import { and, where } from 'sequelize';
 import Vehicle from '../models/Vehicle';
 
 
@@ -12,7 +12,13 @@ class VehicleController {
         if (vehicleExists) {
             return res.status(400).json({ error: "Veículo já cadastrado" });
         }
-        const { id, placa, active, description } = await Vehicle.create(req.body)
+        const { id, placa, active, description } = await Vehicle.create(
+            {
+                placa: req.body.placa,
+                active: req.body.active,
+                description: req.body.description,
+                user_id: req.userId
+            })
         return res.json({
             id,
             placa,
@@ -24,12 +30,19 @@ class VehicleController {
     async index(req, res) {
         console.log(req.body.active)
         if(req.body.active === "all"){
-            const vehicles = await Vehicle.findAll()
+            const vehicles = await Vehicle.findAll(
+                {
+                    where: {
+                        user_id: req.userId
+                    }
+                }
+            );
             return res.send(vehicles)
         }
         const vehicles = await Vehicle.findAll({
             where:{
-                active:req.body.active
+                active:req.body.active === "true" ? true : false,
+                user_id: req.userId
             }
         });
         return res.send(vehicles)

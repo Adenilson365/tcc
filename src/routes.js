@@ -2,25 +2,42 @@ import { Router } from "express"
 import UserController from "./app/controllers/UserController";
 import SessionController from "./app/controllers/SessionController";
 import VehicleController from "./app/controllers/VehicleController";
-import authMiddleware from './app/middlewares/auth'
+import authmiddleware from './app/middlewares/auth'
 import FreightController from "./app/controllers/FreightController";
 import SupplyController from "./app/controllers/SupplyController";
 import ExpenseController from "./app/controllers/ExpenseController";
+import CalculatorController from "./app/controllers/CalculatorController";
+import RevenueController from "./app/controllers/RevenueController";
 const routes = new Router();
 
 routes.post('/users', UserController.store)
 routes.post('/sessions', SessionController.store)
-routes.put('/users', authMiddleware, UserController.update);
-routes.post('/vehicles',authMiddleware,VehicleController.store )
-routes.get('/vehicles',authMiddleware,VehicleController.index )
+
+routes.use(authmiddleware)
+routes.put('/users', UserController.update);
+routes.post('/vehicles',VehicleController.store )
+routes.get('/vehicles',VehicleController.index )
 
 //Rotas fretes
-routes.get('/freights',authMiddleware,FreightController.index)
+routes.get('/freights',FreightController.index)
+routes.post('/freights',FreightController.store)
+routes.get('/freights/total',FreightController.totalFreight)
 
 //Combustivel
-routes.get('/supplies',authMiddleware, SupplyController.index)
+routes.get('/supplies', SupplyController.index)
+routes.post('/supplies', SupplyController.store)
+routes.get('/supplies/total', SupplyController.getTotalSupplies)
 
 // despesas
-routes.get('/expenses',authMiddleware, ExpenseController.index)
+routes.get('/expenses', ExpenseController.index)
+routes.post('/expenses', ExpenseController.store)
+routes.get('/expenses/total', ExpenseController.getTotalExpenses)
+
+// calculadora
+routes.get('/calculator', CalculatorController.getNetValue)
+
+//Revenues
+routes.get('/revenues', RevenueController.index)
+routes.post('/revenues', RevenueController.store)
 
 export default routes;

@@ -14,6 +14,11 @@ class Vehicle extends Model{
             }
         )
     }
+
+    static associate(models){
+        this.belongsTo(models.User, { foreignKey: "user_id", as: "users" });
+        //belongsTo: Define a relação de 1:N 1 usuário tem muitas despesas
+    }
 }
 
 export default Vehicle;

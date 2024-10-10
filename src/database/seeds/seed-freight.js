@@ -1,5 +1,7 @@
 'use strict';
 
+const { user } = require('pg/lib/defaults');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -17,6 +19,7 @@ module.exports = {
       "destination": "Sarandi",
       created_at: new Date(),
       updated_at: new Date(),
+      user_id: 1
     },
     {
       "gross_freight": 4500.00,
@@ -32,6 +35,7 @@ module.exports = {
       "destination": "Sarandi",
       created_at: new Date(),
       updated_at: new Date(),
+      user_id: 2
     },
     {
       "gross_freight": 3500.00,
@@ -46,6 +50,7 @@ module.exports = {
       "destination": "Sarandi",
       created_at: new Date(),
       updated_at: new Date(),
+      user_id: 2
     },
     {
       "gross_freight": 4500.00,
@@ -61,6 +66,7 @@ module.exports = {
       "destination": "Sarandi",
       created_at: new Date(),
       updated_at: new Date(),
+      user_id: 1
     },
     {
       "gross_freight": 3500.00,
@@ -75,6 +81,7 @@ module.exports = {
       "destination": "Sarandi",
       created_at: new Date(),
       updated_at: new Date(),
+      user_id: 2
     },
     {
       "gross_freight": 4500.00,
@@ -90,6 +97,7 @@ module.exports = {
       "destination": "Sarandi",
       created_at: new Date(),
       updated_at: new Date(),
+      user_id: 1
     },
     {"gross_freight": 3500.00,
     "net_freight": 652.80,
@@ -103,6 +111,7 @@ module.exports = {
     "destination": "Sarandi",
     created_at: new Date(),
     updated_at: new Date(),
+    user_id: 1
 
 
     }
