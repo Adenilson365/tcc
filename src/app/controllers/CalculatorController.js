@@ -17,13 +17,16 @@ class CalculatorController {
             // Valor líquido é o total de fretes menos as despesas e abastecimentos
             const netValue = (totalFreights + totalRevenues) - (totalExpenses + totalSupplies);
 
+            const totalReceived = totalRevenues + totalFreights;
+
             // Retorna os valores calculados
             return res.status(200).json({
                 totalExpenses,
                 totalSupplies,
                 totalFreights,
                 totalRevenues,
-                netValue
+                netValue,
+                totalReceived
             });
         } catch (error) {
             console.error('Erro ao calcular o valor líquido:', error);
