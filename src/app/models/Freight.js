@@ -6,6 +6,7 @@ class Freight extends Model {
       {
         gross_freight: Sequelize.FLOAT,
         net_freight: Sequelize.FLOAT,
+        tariff: Sequelize.FLOAT,
         advance: Sequelize.FLOAT,
         money_value_loss: Sequelize.FLOAT,
         expents: Sequelize.FLOAT,

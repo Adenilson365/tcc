@@ -12,8 +12,10 @@ const routes = new Router();
 
 routes.post('/users', UserController.store)
 routes.post('/sessions', SessionController.store)
+routes.get('/validate-token', SessionController.validateToken);
 
 routes.use(authmiddleware)
+
 routes.put('/users', UserController.update);
 routes.post('/vehicles',VehicleController.store )
 routes.get('/vehicles',VehicleController.index )
@@ -39,5 +41,8 @@ routes.get('/calculator', CalculatorController.getNetValue)
 //Revenues
 routes.get('/revenues', RevenueController.index)
 routes.post('/revenues', RevenueController.store)
+
+//validate token
+routes.get('/validate-token', SessionController.validateToken);
 
 export default routes;

@@ -63,6 +63,11 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
       },
+        tariff: {
+          type: Sequelize.FLOAT,
+          defaultValue: 0,
+          allowNull: false,
+        },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
