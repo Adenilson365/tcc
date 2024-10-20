@@ -1,22 +1,35 @@
+import { Op } from "sequelize";
 import Expense from "../models/Expense";
 import Supply from "../models/Supply";
 import Freight from "../models/Freight";
 import Revenue from "../models/Revenue";
 
-
 class CalculatorController {
-
     async getNetValue(req, res) {
         try {
-            // Calcula os totais das despesas, abastecimentos e fretes
-            const totalExpenses = await Expense.sum('purchase_value', { where: { user_id: req.userId } });
-            const totalSupplies = await Supply.sum('purchase_value', { where: { user_id: req.userId } });
-            const totalFreights = await Freight.sum('net_freight', { where: { user_id: req.userId } });
-            const totalRevenues = await Revenue.sum('value', { where: { user_id: req.userId } });
+            //Documentação do método no README da raiz do projeto
+            const { month } = req.query; 
+            const whereClause = { user_id: req.userId };
 
-            // Valor líquido é o total de fretes menos as despesas e abastecimentos
+           
+            if (month) {
+                const [year, monthIndex] = month.split('-');
+                const startDate = new Date(Date.UTC(year, monthIndex - 1, 1)); 
+                const endDate = new Date(Date.UTC(year, monthIndex, 1)); 
+                whereClause.createdAt = {
+                    [Op.gte]: startDate,
+                    [Op.lt]: endDate,
+                };
+            }
+
+            // Calcula os totais das despesas, abastecimentos, fretes e receitas
+            const totalExpenses = await Expense.sum('purchase_value', { where: whereClause });
+            const totalSupplies = await Supply.sum('purchase_value', { where: whereClause });
+            const totalFreights = await Freight.sum('net_freight', { where: whereClause });
+            const totalRevenues = await Revenue.sum('value', { where: whereClause });
+
+            // Valor líquido é o total de fretes e receitas menos as despesas e abastecimentos
             const netValue = (totalFreights + totalRevenues) - (totalExpenses + totalSupplies);
-
             const totalReceived = totalRevenues + totalFreights;
 
             // Retorna os valores calculados

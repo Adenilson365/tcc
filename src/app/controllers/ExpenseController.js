@@ -25,19 +25,15 @@ class ExpenseController {
   
 
     async getTotalExpenses(req, res) {
+        //Documentação do método no README da raiz do projeto
       try {
-        const { month } = req.query; // Obtém o mês do parâmetro de consulta (Exemplo: url:/expenses/total?month=2021-01)
+        const { month } = req.query; 
         const whereClause = { user_id: req.userId };
-    
-        //Adiciona a condição de mês, se fornecida
-        //Se não for fornecido um mês, a consulta retornará o total de despesas desde o início da conta
-        //Formato do mês: yyyy-mm (exemplo: 2021-01 para janeiro de 2021)
-        // Se não houver despesas no mês fornecido, retorna null
 
         if (month) {
           const [year, monthIndex] = month.split('-');
-          const startDate = new Date(Date.UTC(year, monthIndex - 1, 1)); // Cria a data de início com base no mês
-          const endDate = new Date(Date.UTC(year, monthIndex, 1)); // Cria a data de fim no próximo mês
+          const startDate = new Date(Date.UTC(year, monthIndex - 1, 1)); 
+          const endDate = new Date(Date.UTC(year, monthIndex, 1)); 
     
           whereClause.createdAt = {
             [Op.gte]: startDate,
