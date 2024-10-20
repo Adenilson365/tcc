@@ -13,15 +13,31 @@ class ExpenseController {
     }
 
     async index(req, res) {
-        const expenses = await Expense.findAll(
-            {
-                where: {
-                    user_id: req.userId
-                }
-            }
-        );
-        return res.send(expenses);
-    }
+              //Documentação do método no README da raiz do projeto
+      try {
+          const { month } = req.query;
+          const whereClause = { user_id: req.userId };
+  
+          if (month) {
+              const [year, monthIndex] = month.split('-');
+              const startDate = new Date(Date.UTC(year, monthIndex - 1, 1)); 
+              const endDate = new Date(Date.UTC(year, parseInt(monthIndex), 1));
+  
+              whereClause.createdAt = {
+                  [Op.gte]: startDate,
+                  [Op.lt]: endDate,
+              };
+          }
+  
+          const expenses = await Expense.findAll({
+              where: whereClause
+          });
+          return res.send(expenses);
+      } catch (error) {
+          console.error('Erro ao obter as despesas:', error);
+          return res.status(500).json({ message: 'Erro ao obter as despesas' });
+      }
+  }
   
 
     async getTotalExpenses(req, res) {
