@@ -27,6 +27,7 @@ class User extends Model{
     }
 
     static associate() {}
+
 }
 
 export default User;

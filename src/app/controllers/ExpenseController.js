@@ -13,7 +13,7 @@ class ExpenseController {
     }
 
     async index(req, res) {
-              //Documentação do método no README da raiz do projeto
+        //Documentação do método no README da raiz do projeto
       try {
           const { month } = req.query;
           const whereClause = { user_id: req.userId };

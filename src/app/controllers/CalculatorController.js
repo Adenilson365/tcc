@@ -39,7 +39,8 @@ class CalculatorController {
                 totalFreights,
                 totalRevenues,
                 netValue,
-                totalReceived
+                totalReceived,
+      
             });
         } catch (error) {
             console.error('Erro ao calcular o valor líquido:', error);
