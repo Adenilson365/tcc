@@ -66,21 +66,24 @@ class UserController{
             email
         })
     }
-    async getUserInfo(req, res) {
-        try {
-            const user = await User.findByPk(req.params.id, {
-                attributes: ['name', 'email', 'createdAt']
-            });
-
-            if (!user) {
-                return res.status(404).json({ error: 'Usuário não encontrado' });
+        async getUserInfo(req, res) {
+            try {
+                const user = await User.findByPk(req.userId);
+    
+                if (!user) {
+                    return res.status(404).json({ error: 'Usuário não encontrado' });
+                }
+    
+                return res.json({
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    createdAt: user.createdAt,
+                });
+            } catch (error) {
+                return res.status(500).json({ error: 'Erro ao buscar usuário' });
             }
-
-            return res.json(user);
-        } catch (error) {
-            return res.status(500).json({ error: 'Erro ao buscar usuário' });
         }
-    }
 }
 
 export default new UserController();

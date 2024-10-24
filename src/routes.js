@@ -19,7 +19,7 @@ routes.use(authmiddleware)
 routes.put('/users', UserController.update);
 routes.post('/vehicles',VehicleController.store )
 routes.get('/vehicles',VehicleController.index )
-routes.get('/user/:id', UserController.getUserInfo)
+routes.get('/users/info', UserController.getUserInfo)
 
 //Rotas fretes
 routes.get('/freights',FreightController.index)
